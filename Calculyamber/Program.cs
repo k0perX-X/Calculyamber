@@ -12,7 +12,7 @@ namespace Calculyamber
                 Config.CreateConfig(Config.lang, Config.round);
             }
             string config = System.IO.File.ReadAllText(@"config.ini"); //снимаем настройки из файла 
-            for (int i = 0; i < config.Length; i++) //офищаем файл от лишней мишуры 
+            for (int i = 0; i < config.Length; i++) //очищаем файл от лишней мишуры 
             {
                 if ((config[i] != '0') && (config[i] != '1') && (config[i] != '2') && (config[i] != '3') &&
                     (config[i] != '4') && (config[i] != '5') && (config[i] != '6') && (config[i] != '7') && 
@@ -51,7 +51,7 @@ namespace Calculyamber
             bool selected = false;
             void viboryazika()
             {
-                Console.Write("Пожалуйста, выберете язык/Please, select language/Будь ласка, виберiть мову \n\n" +
+                Console.Write("\nПожалуйста, выберете язык/Please, select language/Будь ласка, виберiть мову \n\n" +
                     "   1 - Русский \n" +
                     "   2 - English \n" +
                     "   3 - Український \n\n" +
@@ -99,11 +99,13 @@ namespace Calculyamber
                         Lang.settings = "\nВведите число, соответствующее пункту меню\n\n";
                         Lang.settingsstroka1 = "    1 - Выбор языка                   Текущее значение: Русский";
                         Lang.settingsstroka2 = "    2 - Выбор разряда округления      Текущее значение: ";
-                        Lang.settingback = "    3 - Вернуться в главное меню";
+                        Lang.settingsback = "    3 - Вернуться в главное меню и сохранить настройки";
                         Lang.settingsvvod = "Пункт меню: ";
                         Lang.menuzagl = "\nГЛАВНОЕ МЕНЮ";
                         Lang.settingszagl = "\nМЕНЮ НАСТРОЕК";
                         Lang.Oprogezagl = "\nО ПРОГРАММЕ";
+                        Lang.settingsstroka2_1 = "\nВведите значение разряда округления.\n\n" +
+                            "Минимальное значение разряда -15. Округление до разрядов 0 и 1 округляет число до целого.\n";
                         ///Lang.errorvivod = "Не число";
                         break;
                     case 2:
@@ -177,7 +179,7 @@ namespace Calculyamber
                                     Console.Write(Lang.settings);
                                     Console.WriteLine(Lang.settingsstroka1);
                                     Console.WriteLine(Lang.settingsstroka2 + Config.round.ToString());
-                                    Console.WriteLine(Lang.settingback);
+                                    Console.WriteLine(Lang.settingsback);
                                     Console.WriteLine('\n');
                                     Console.Write(Lang.settingsvvod);
                                     while (!(int.TryParse(Console.ReadLine(), out tf)) || !((tf >= 1) && (tf <= 3)))
@@ -190,6 +192,11 @@ namespace Calculyamber
                                             nastroikayazika();
                                             break;
                                         case 2:
+                                            Console.Clear();
+                                            Console.WriteLine(Lang.settingsstroka2_1);
+                                            Console.Write(Lang.settingsvvod);
+                                            while (!(int.TryParse(Console.ReadLine(), out Config.round)) || !(Config.round >= -15))
+                                            { Console.ForegroundColor = ConsoleColor.Red; Console.WriteLine(Lang.errorformat); Console.ResetColor(); } //ввод значения
                                             break;
                                         case 3:
                                             exit1 = false;
@@ -197,6 +204,7 @@ namespace Calculyamber
                                     }
                                     Console.Clear();
                                 }
+                                Config.CreateConfig(Config.lang, Config.round);
                             }
                             break;
                         case 3: //о программе
@@ -225,8 +233,8 @@ namespace Calculyamber
             while (exit)
             {
                 s = Console.ReadLine();
-                if (s.Contains("exit")) { exit = false; }
-                else if (s.Contains("menu")) { Console.Clear(); menu(); }
+                if (s.Contains("exit")) { exit = false;  }
+                else if (s.Contains("menu")) { Console.Clear(); menu(); Console.WriteLine(Lang.stroka1); }
                 else if (!double.TryParse(s, out chislo)) { Console.ForegroundColor = ConsoleColor.Red; Console.WriteLine(Lang.errorformat); Console.ResetColor(); }
                 else if (chislo < 0)
                 {
@@ -246,6 +254,19 @@ namespace Calculyamber
                 }
                 else
                 {
+                    Console.ForegroundColor = ConsoleColor.DarkYellow; // устанавливаем цвет
+                    if (Config.round > 0)
+                    {
+                        int x = (int)Math.Round(Math.Sqrt(chislo));
+                        for (int i = 1; i < Config.round; i++)
+                        {
+                            if (x % 10 < 6) x = x / 10;
+                            else x = x / 10 + 1;
+                        }
+                        Console.WriteLine(x * Math.Pow(10, Config.round - 1));
+                    }
+                    else Console.WriteLine(Math.Round(Math.Sqrt(chislo), -Config.round));
+                    Console.ResetColor(); // сбрасываем в стандартный
                 }
             }
 
@@ -270,9 +291,10 @@ namespace Calculyamber
             public static string settingszagl = "";
             public static string settingsstroka1 = "";
             public static string settingsstroka2 = "";
-            public static string settingback = "";
+            public static string settingsback = "";
             public static string settingsvvod = "";
             public static string Oprogezagl = "";
+            public static string settingsstroka2_1 = "";
             ///public static string errorvivod = "";
         }
 
