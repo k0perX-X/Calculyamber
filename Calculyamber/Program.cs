@@ -34,18 +34,15 @@ namespace Calculyamber
                     int z1, z2; //временные значения
                     error = !int.TryParse(configs[0], out z1); //проверяем возможность считывания значения конфига
                     error = !int.TryParse(configs[1], out z2);
-                    //error = !int.TryParse(configs[2], out z3);
                     if (!error) //проверяем правильность считанных данных
                     {
                         if ((z1 < 0) || (z1 > 3)) { error = true; }
                         if ((z2 < -15) || (z2 > 0)) { error = true; }
-                        //if (z3 < 0) { error = true; }
                     }
                     if (!error) //вводим полученные значения в программу
                     {
                         Config.lang = z1;
                         Config.round = z2;
-                        //Config.infinity = z3;
                     }
                 }
             }
@@ -62,7 +59,7 @@ namespace Calculyamber
                     "   3 - Український \n\n" +
                     "Введите число, соответствующее языку/\n" +
                     "Enter the number corresponding to the language, that you want to select/\n" +
-                    "Введiть число, вiдповiдне обраноний мовi \n");
+                    "Введiть число, вiдповiдне мовi \n");
                 while (!(int.TryParse(Console.ReadLine(), out Config.lang)) || !((Config.lang >= 1) && (Config.lang <= 3))) //ввод значения
                 {
                     Console.ForegroundColor = ConsoleColor.Red; // устанавливаем цвет
@@ -77,7 +74,7 @@ namespace Calculyamber
                 Console.Clear();
                 selected = true;
             }
-            //вводим настрокий язка
+            //вводим настрокий языка
             void nastroikayazika()
             {
                 switch (Config.lang)
@@ -90,7 +87,6 @@ namespace Calculyamber
                             "1 - Да \n" +
                             "2 - Нет \n";
                         Lang.errorformat = "Неверный формат";
-                        ///Lang.kolvochisel = "Сколько чисел вы хотите ввести? (Для бесконечного ввода введите 0) ";
                         Lang.vihod = "Для выхода нажмите любую клавишу";
                         Lang.menu = "\nВведите число, соответствующее пункту меню\n\n" +
                             "   1 - Начать работу\n" +
@@ -109,16 +105,16 @@ namespace Calculyamber
                         Lang.settingszagl = "\nМЕНЮ НАСТРОЕК";
                         Lang.Oprogezagl = "\nО ПРОГРАММЕ";
                         Lang.settingsstroka2_1 = "\nВведите значение разряда округления.\n\n" +
-                            "Минимальное значение разряда -15. Округление до разрядов 0 и 1 округляет число до целого.\n";
-                        ///Lang.errorvivod = "Не число";
+                            "Минимальное значение разряда -15.\n";
+                        Lang.predlozhenie_vvoda2 = "Введите занчение: ";
+                        Lang.settingsback2 = "    4 - Вернуться в главное меню без сохранения настройек";
                         break;
                     case 2:
-                        /*Lang.stroka1 = "Enter the number to calculate its square root";
+                        Lang.stroka1 = "Enter the number to calculate its square root";
                         Lang.zapros = "Save selection?\n" +
                             "1 - Yes \n" +
                             "2 - No \n";
                         Lang.errorformat = "Wrong format";
-                        ///Lang.kolvochisel = "How many numbers do you want to enter? (For infinite input enter 0) ";
                         Lang.vihod = "Press any key to exit";
                         Lang.menu = "\nEnter the number, corresponding to the menu item:\n\n" +
                             "   1 - Start program\n" +
@@ -127,7 +123,7 @@ namespace Calculyamber
                             "   4 - Exit to desktop\n\n" +
                             "Menu item: ";
                         Lang.errorconfig = "\nWRONG CONFIG FILE FORMAT! DEFAULT SETTINGS WILL BE USED \n" +
-                        ///Lang.errorvivod = "Not a number";*/
+                            "";
                         break;
                     case 3:
                         /*Lang.stroka1 = "Введiть число, корiнь якого хочете отримати";
@@ -135,9 +131,7 @@ namespace Calculyamber
                             "1 - Так \n" +
                             "2 - Нi \n";
                         Lang.errorformat = "Невiрний формат";
-                        ///Lang.kolvochisel = "Скiльки чисел ви хочете ввести? (Для нескiнченного введення введiть 0) ";
-                        Lang.vihod = "Для виходу натиснiть будь-яку клавiшу";
-                        ///Lang.errorvivod = "Чи не число";*/
+                        Lang.vihod = "Для виходу натиснiть будь-яку клавiшу";*/
                         break;
                 }
             }
@@ -181,6 +175,8 @@ namespace Calculyamber
                             {
                                 bool exit1 = true;
                                 int tf;
+                                int conflang = Config.lang;
+                                int confround = Config.round;
                                 while (exit1)
                                 {
                                     error = false;
@@ -189,30 +185,33 @@ namespace Calculyamber
                                     Console.WriteLine(Lang.settingsstroka1);
                                     Console.WriteLine(Lang.settingsstroka2 + Config.round.ToString());
                                     Console.WriteLine(Lang.settingsback);
+                                    Console.WriteLine(Lang.settingsback2);
                                     Console.WriteLine('\n');
                                     Console.Write(Lang.predlozhenie_vvoda);
                                     while (!(int.TryParse(Console.ReadLine(), out tf)) || !((tf >= 1) && (tf <= 4)))
                                     { Console.ForegroundColor = ConsoleColor.Red; Console.WriteLine(Lang.errorformat); Console.ResetColor(); } //ввод значения
                                     switch (tf)
                                     {
-                                        case 1:
+                                        case 1: //выбор языка
                                             Console.Clear();
                                             viboryazika();
                                             nastroikayazika();
                                             break;
-                                        case 2:
+                                        case 2: //округление
                                             Console.Clear();
                                             Console.WriteLine(Lang.settingsstroka2_1);
-                                            Console.Write(Lang.predlozhenie_vvoda);
+                                            Console.Write(Lang.predlozhenie_vvoda2);
                                             while (!(int.TryParse(Console.ReadLine(), out Config.round)) || !(Config.round >= -15) || !(Config.round <= 0))
-                                                { Console.ForegroundColor = ConsoleColor.Red; Console.WriteLine(Lang.errorformat); Console.ResetColor(); Console.Write(Lang.predlozhenie_vvoda); } //ввод значения
+                                                { Console.ForegroundColor = ConsoleColor.Red; Console.WriteLine(Lang.errorformat); Console.ResetColor(); Console.Write(Lang.predlozhenie_vvoda2); } //ввод значения
                                             break;
-                                        case 3:
+                                        case 3: //выход с сохиранением
                                             exit1 = false;
                                             Config.CreateConfig(Config.lang, Config.round);
                                             break;
-                                        case 4:
+                                        case 4: //выход без сохаранения
                                             exit1 = false;
+                                            Config.lang = conflang;
+                                            Config.round = confround;
                                             break;
                                     }
                                     Console.Clear();
@@ -271,7 +270,6 @@ namespace Calculyamber
         public static class Lang //класс со значениями языка
         {
             public static string stroka1 = "";
-            ///public static string kolvochisel = "";
             public static string zapros = "";
             public static string errorformat = "";
             public static string vihod = "";
@@ -287,20 +285,19 @@ namespace Calculyamber
             public static string predlozhenie_vvoda = "";
             public static string Oprogezagl = "";
             public static string settingsstroka2_1 = "";
-            ///public static string errorvivod = "";
+            public static string predlozhenie_vvoda2 = "";
+            public static string settingsback2 = "";
         }
 
         public static class Config //класс с настройками
         {
             public static int lang = 0;
             public static int round = -15; //0 итерпретируется как округление до целого, 1 то же, 2 десятки и тд
-            //public static int infinity = 0;
-            public static void CreateConfig(int lang, int okrug/*, int infinity*/) //Создает файл настроек 
+            public static void CreateConfig(int lang, int okrug) //Создает файл настроек 
             {
                 System.IO.File.WriteAllText(@"config.ini",
                     "lang=" + lang.ToString() + "\n" +
-                    "round=" + okrug.ToString() + "\n" /*+
-                    "infinity=" + infinity.ToString() + "\n"*/);
+                    "round=" + okrug.ToString() + "\n");
             }
         }
     }
