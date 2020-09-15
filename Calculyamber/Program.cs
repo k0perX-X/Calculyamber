@@ -34,7 +34,7 @@ namespace Calculyamber
                 if (!error) //проверяем правильность считанных данных
                 {
                     if ((z1 < 0) || (z1 > 3)) { error = true; }
-                    if (z2 < -15) { error = true; }
+                    if ((z2 < -15) || (z2 > 0)) { error = true; }
                     //if (z3 < 0) { error = true; }
                 }
                 if (!error) //вводим полученные значения в программу
@@ -56,7 +56,7 @@ namespace Calculyamber
                     "   2 - English \n" +
                     "   3 - Український \n\n" +
                     "Введите число, соответствующее выбранному языку/\n" +
-                    "Enter the number corresponding to the selected language/\n" +
+                    "Enter the number corresponding to the language, that you want to select/\n" +
                     "Введiть число, вiдповiдне обраноний мовi \n");
                 while (!(int.TryParse(Console.ReadLine(), out Config.lang)) || !((Config.lang >= 1) && (Config.lang <= 3))) //ввод значения
                 {
@@ -88,10 +88,10 @@ namespace Calculyamber
                         ///Lang.kolvochisel = "Сколько чисел вы хотите ввести? (Для бесконечного ввода введите 0) ";
                         Lang.vihod = "Для выхода нажмите любую клавишу";
                         Lang.menu = "\nВведите число, соответствующее пункту меню\n\n" +
-                            "   1 - Калькулямбер\n" +
+                            "   1 - Начать работу\n" +
                             "   2 - Настройки\n" +
                             "   3 - О программе\n" +
-                            "   4 - Выход\n\n" +
+                            "   4 - Выход на рабочий стол\n\n" +
                             "Пункт меню: ";
                         Lang.errorconfig = "\nНЕПРАВИЛЬНЫЙ ФОРМАТ CONFIG ФАЙЛА! ИСПОЛЬЗОВАНЫ СТАНДАРТНЫЕ НАСТРОЙКИ \n" +
                             "ЗАЙДИТЕ В НАСТРОЙКИ, ЧТОБЫ ЭТО СООБЩЕНИЕ ИСЧЕЗЛО";
@@ -116,23 +116,23 @@ namespace Calculyamber
                         Lang.errorformat = "Wrong format";
                         ///Lang.kolvochisel = "How many numbers do you want to enter? (For infinite input enter 0) ";
                         Lang.vihod = "Press any key to exit";
-                        Lang.menu = "\nВведите число, соответствующее пункту меню\n\n" +
-                            "   1 - Калькулямбер\n" +
-                            "   2 - Настройки\n" +
-                            "   3 - О программе\n" +
-                            "   4 - Выход\n\n" +
-                            "Пункт меню: ";
-                        Lang.errorconfig = "\nНЕПРАВИЛЬНЫЙ ФОРМАТ CONFIG ФАЙЛА! ИСПОЛЬЗОВАНЫ СТАНДАРТНЫЕ НАСТРОЙКИ \n" +
+                        Lang.menu = "\nEnter the number, corresponding to the menu item:\n\n" +
+                            "   1 - Start program\n" +
+                            "   2 - Settings\n" +
+                            "   3 - About\n" +
+                            "   4 - Exit to desktop\n\n" +
+                            "Menu item: ";
+                        Lang.errorconfig = "\nWRONG CONFIG FILE FORMAT! DEFAULT SETTINGS WILL BE USED \n" +
                             "ЗАЙДИТЕ В НАСТРОЙКИ, ЧТОБЫ ЭТО СООБЩЕНИЕ ИСЧЕЗЛО";
                         Lang.Oproge = "";
                         Lang.settings = "\nВведите число, соответствующее пункту меню\n\n";
-                        Lang.settingsstroka1 = "    1 - Выбор языка                   Текущее значение: Русский";
-                        Lang.settingsstroka2 = "    2 - Выбор разряда округления      Текущее значение: ";
-                        Lang.settingsback = "    3 - Вернуться в главное меню и сохранить настройки";
-                        Lang.settingsvvod = "Пункт меню: ";
-                        Lang.menuzagl = "\nГЛАВНОЕ МЕНЮ";
-                        Lang.settingszagl = "\nМЕНЮ НАСТРОЕК";
-                        Lang.Oprogezagl = "\nО ПРОГРАММЕ";
+                        Lang.settingsstroka1 = "    1 - Choose language                Current language: English";
+                        Lang.settingsstroka2 = "    2 - Выбор разряда округления       Current value: ";
+                        Lang.settingsback = "    3 - Save settings and exit to main menu";
+                        Lang.settingsvvod = "Menu item: ";
+                        Lang.menuzagl = "\nMAIN MENU";
+                        Lang.settingszagl = "\nSETTINGS MENU";
+                        Lang.Oprogezagl = "\nABOUT";
                         Lang.settingsstroka2_1 = "\nВведите значение разряда округления.\n\n" +
                             "Минимальное значение разряда -15. Округление до разрядов 0 и 1 округляет число до целого.\n";
                         ///Lang.errorvivod = "Not a number";
@@ -229,7 +229,7 @@ namespace Calculyamber
                                             Console.Clear();
                                             Console.WriteLine(Lang.settingsstroka2_1);
                                             Console.Write(Lang.settingsvvod);
-                                            while (!(int.TryParse(Console.ReadLine(), out Config.round)) || !(Config.round >= -15))
+                                            while (!(int.TryParse(Console.ReadLine(), out Config.round)) || !(Config.round >= -15) || !(Config.round <= 0))
                                             { Console.ForegroundColor = ConsoleColor.Red; Console.WriteLine(Lang.errorformat); Console.ResetColor(); } //ввод значения
                                             break;
                                         case 3:
@@ -273,17 +273,7 @@ namespace Calculyamber
                 else if (chislo < 0)
                 {
                     Console.ForegroundColor = ConsoleColor.DarkYellow; // устанавливаем цвет
-                    if (Config.round > 0)
-                    {
-                        int x = (int)Math.Round(Math.Sqrt(-chislo));
-                        for (int i = 1; i < Config.round; i++)
-                        {
-                            if (x % 10 < 6) x = x / 10;
-                            else x = x / 10 + 1;
-                        }
-                        Console.WriteLine(x.ToString() + "i");
-                    }
-                    else Console.WriteLine(Math.Round(Math.Sqrt(-chislo), -Config.round).ToString() + "i"); 
+                    Console.WriteLine(Math.Round(Math.Sqrt(-chislo), -Config.round).ToString() + "i"); 
                     Console.ResetColor(); // сбрасываем в стандартный
                 }
                 else
