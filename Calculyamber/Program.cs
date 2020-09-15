@@ -85,7 +85,7 @@ namespace Calculyamber
                             "1 - Да \n" +
                             "2 - Нет \n";
                         Lang.errorformat = "Неверный формат";
-                        Lang.kolvochisel = "Сколько чисел вы хотите ввести? (Для бесконечного ввода введите 0) ";
+                        ///Lang.kolvochisel = "Сколько чисел вы хотите ввести? (Для бесконечного ввода введите 0) ";
                         Lang.vihod = "Для выхода нажмите любую клавишу";
                         Lang.menu = "\nВведите число, соответствующее пункту меню\n\n" +
                             "   1 - Калькулямбер\n" +
@@ -114,10 +114,27 @@ namespace Calculyamber
                             "1 - Yes \n" +
                             "2 - No \n";
                         Lang.errorformat = "Wrong format";
-                        Lang.kolvochisel = "How many numbers do you want to enter? (For infinite input enter 0) ";
+                        ///Lang.kolvochisel = "How many numbers do you want to enter? (For infinite input enter 0) ";
                         Lang.vihod = "Press any key to exit";
-                        Lang.menu = "";
+                        Lang.menu = "\nВведите число, соответствующее пункту меню\n\n" +
+                            "   1 - Калькулямбер\n" +
+                            "   2 - Настройки\n" +
+                            "   3 - О программе\n" +
+                            "   4 - Выход\n\n" +
+                            "Пункт меню: ";
+                        Lang.errorconfig = "\nНЕПРАВИЛЬНЫЙ ФОРМАТ CONFIG ФАЙЛА! ИСПОЛЬЗОВАНЫ СТАНДАРТНЫЕ НАСТРОЙКИ \n" +
+                            "ЗАЙДИТЕ В НАСТРОЙКИ, ЧТОБЫ ЭТО СООБЩЕНИЕ ИСЧЕЗЛО";
                         Lang.Oproge = "";
+                        Lang.settings = "\nВведите число, соответствующее пункту меню\n\n";
+                        Lang.settingsstroka1 = "    1 - Выбор языка                   Текущее значение: Русский";
+                        Lang.settingsstroka2 = "    2 - Выбор разряда округления      Текущее значение: ";
+                        Lang.settingsback = "    3 - Вернуться в главное меню и сохранить настройки";
+                        Lang.settingsvvod = "Пункт меню: ";
+                        Lang.menuzagl = "\nГЛАВНОЕ МЕНЮ";
+                        Lang.settingszagl = "\nМЕНЮ НАСТРОЕК";
+                        Lang.Oprogezagl = "\nО ПРОГРАММЕ";
+                        Lang.settingsstroka2_1 = "\nВведите значение разряда округления.\n\n" +
+                            "Минимальное значение разряда -15. Округление до разрядов 0 и 1 округляет число до целого.\n";
                         ///Lang.errorvivod = "Not a number";
                         break;
                     case 3:
@@ -126,10 +143,27 @@ namespace Calculyamber
                             "1 - Так \n" +
                             "2 - Нi \n";
                         Lang.errorformat = "Невiрний формат";
-                        Lang.kolvochisel = "Скiльки чисел ви хочете ввести? (Для нескiнченного введення введiть 0) ";
+                        ///Lang.kolvochisel = "Скiльки чисел ви хочете ввести? (Для нескiнченного введення введiть 0) ";
                         Lang.vihod = "Для виходу натиснiть будь-яку клавiшу";
-                        Lang.menu = "";
+                        Lang.menu = "\nВведите число, соответствующее пункту меню\n\n" +
+                            "   1 - Калькулямбер\n" +
+                            "   2 - Настройки\n" +
+                            "   3 - О программе\n" +
+                            "   4 - Выход\n\n" +
+                            "Пункт меню: ";
+                        Lang.errorconfig = "\nНЕПРАВИЛЬНЫЙ ФОРМАТ CONFIG ФАЙЛА! ИСПОЛЬЗОВАНЫ СТАНДАРТНЫЕ НАСТРОЙКИ \n" +
+                            "ЗАЙДИТЕ В НАСТРОЙКИ, ЧТОБЫ ЭТО СООБЩЕНИЕ ИСЧЕЗЛО";
                         Lang.Oproge = "";
+                        Lang.settings = "\nВведите число, соответствующее пункту меню\n\n";
+                        Lang.settingsstroka1 = "    1 - Выбор языка                   Текущее значение: Русский";
+                        Lang.settingsstroka2 = "    2 - Выбор разряда округления      Текущее значение: ";
+                        Lang.settingsback = "    3 - Вернуться в главное меню и сохранить настройки";
+                        Lang.settingsvvod = "Пункт меню: ";
+                        Lang.menuzagl = "\nГЛАВНОЕ МЕНЮ";
+                        Lang.settingszagl = "\nМЕНЮ НАСТРОЕК";
+                        Lang.Oprogezagl = "\nО ПРОГРАММЕ";
+                        Lang.settingsstroka2_1 = "\nВведите значение разряда округления.\n\n" +
+                            "Минимальное значение разряда -15. Округление до разрядов 0 и 1 округляет число до целого.\n";
                         ///Lang.errorvivod = "Чи не число";
                         break;
                 }
@@ -279,7 +313,7 @@ namespace Calculyamber
         public static class Lang //класс со значениями языка
         {
             public static string stroka1 = "";
-            public static string kolvochisel = "";
+            ///public static string kolvochisel = "";
             public static string zapros = "";
             public static string errorformat = "";
             public static string vihod = "";
