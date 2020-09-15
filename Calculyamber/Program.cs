@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.VisualBasic;
+using System;
 
 namespace Calculyamber
 {
@@ -6,42 +7,46 @@ namespace Calculyamber
     {
         static void Main(string[] args)
         {
+            bool error = false;
             //снимаем настройки из конфига
             if (!(System.IO.File.Exists(@"config.ini"))) //проверяем существует ли файл с настройками если нет создаём
             {
                 Config.CreateConfig(Config.lang, Config.round);
+                error = true;
             }
-            string config = System.IO.File.ReadAllText(@"config.ini"); //снимаем настройки из файла 
-            for (int i = 0; i < config.Length; i++) //очищаем файл от лишней мишуры 
-            {
-                if ((config[i] != '0') && (config[i] != '1') && (config[i] != '2') && (config[i] != '3') &&
-                    (config[i] != '4') && (config[i] != '5') && (config[i] != '6') && (config[i] != '7') && 
-                    (config[i] != '8') && (config[i] != '9') && (config[i] != '\n') && (config[i] != '-'))
-                {
-                    config = config.Remove(i, 1);
-                    i--;
-                }
-            }
-            string[] configs = config.Split('\n'); //разделяем строку на отдельные настройки 
-            bool error = false;
-            if (configs.Length < 2) { error = true; }
             else
             {
-                int z1, z2; //временные значения
-                error = !int.TryParse(configs[0], out z1); //проверяем возможность считывания значения конфига
-                error = !int.TryParse(configs[1], out z2);
-                //error = !int.TryParse(configs[2], out z3);
-                if (!error) //проверяем правильность считанных данных
+                string config = System.IO.File.ReadAllText(@"config.ini"); //снимаем настройки из файла 
+                for (int i = 0; i < config.Length; i++) //очищаем файл от лишней мишуры 
                 {
-                    if ((z1 < 0) || (z1 > 3)) { error = true; }
-                    if ((z2 < -15) || (z2 > 0)) { error = true; }
-                    //if (z3 < 0) { error = true; }
+                    if ((config[i] != '0') && (config[i] != '1') && (config[i] != '2') && (config[i] != '3') &&
+                        (config[i] != '4') && (config[i] != '5') && (config[i] != '6') && (config[i] != '7') &&
+                        (config[i] != '8') && (config[i] != '9') && (config[i] != '\n') && (config[i] != '-'))
+                    {
+                        config = config.Remove(i, 1);
+                        i--;
+                    }
                 }
-                if (!error) //вводим полученные значения в программу
+                string[] configs = config.Split('\n'); //разделяем строку на отдельные настройки 
+                if (configs.Length < 2) { error = true; }
+                else
                 {
-                    Config.lang = z1;
-                    Config.round = z2;
-                    //Config.infinity = z3;
+                    int z1, z2; //временные значения
+                    error = !int.TryParse(configs[0], out z1); //проверяем возможность считывания значения конфига
+                    error = !int.TryParse(configs[1], out z2);
+                    //error = !int.TryParse(configs[2], out z3);
+                    if (!error) //проверяем правильность считанных данных
+                    {
+                        if ((z1 < 0) || (z1 > 3)) { error = true; }
+                        if ((z2 < -15) || (z2 > 0)) { error = true; }
+                        //if (z3 < 0) { error = true; }
+                    }
+                    if (!error) //вводим полученные значения в программу
+                    {
+                        Config.lang = z1;
+                        Config.round = z2;
+                        //Config.infinity = z3;
+                    }
                 }
             }
 
@@ -55,7 +60,7 @@ namespace Calculyamber
                     "   1 - Русский \n" +
                     "   2 - English \n" +
                     "   3 - Український \n\n" +
-                    "Введите число, соответствующее выбранному языку/\n" +
+                    "Введите число, соответствующее языку/\n" +
                     "Enter the number corresponding to the language, that you want to select/\n" +
                     "Введiть число, вiдповiдне обраноний мовi \n");
                 while (!(int.TryParse(Console.ReadLine(), out Config.lang)) || !((Config.lang >= 1) && (Config.lang <= 3))) //ввод значения
@@ -163,7 +168,9 @@ namespace Calculyamber
                     }
                     Console.ForegroundColor = ConsoleColor.Blue; Console.WriteLine(Lang.menuzagl); Console.ResetColor();
                     Console.Write(Lang.menu);
-                    while (!(int.TryParse(Console.ReadLine(), out vvod)) || !((vvod >= 1) && (vvod <= 4))) { Console.ForegroundColor = ConsoleColor.Red; Console.WriteLine(Lang.errorformat); Console.ResetColor(); } //ввод значения
+                    Console.Write(Lang.predlozhenie_vvoda);
+                    while (!(int.TryParse(Console.ReadLine(), out vvod)) || !((vvod >= 1) && (vvod <= 4))) 
+                        { Console.ForegroundColor = ConsoleColor.Red; Console.WriteLine(Lang.errorformat); Console.ResetColor(); Console.Write(Lang.predlozhenie_vvoda); } //ввод значения
                     Console.Clear();
                     switch (vvod)
                     {
@@ -184,7 +191,7 @@ namespace Calculyamber
                                     Console.WriteLine(Lang.settingsback);
                                     Console.WriteLine('\n');
                                     Console.Write(Lang.predlozhenie_vvoda);
-                                    while (!(int.TryParse(Console.ReadLine(), out tf)) || !((tf >= 1) && (tf <= 3)))
+                                    while (!(int.TryParse(Console.ReadLine(), out tf)) || !((tf >= 1) && (tf <= 4)))
                                     { Console.ForegroundColor = ConsoleColor.Red; Console.WriteLine(Lang.errorformat); Console.ResetColor(); } //ввод значения
                                     switch (tf)
                                     {
@@ -198,15 +205,18 @@ namespace Calculyamber
                                             Console.WriteLine(Lang.settingsstroka2_1);
                                             Console.Write(Lang.predlozhenie_vvoda);
                                             while (!(int.TryParse(Console.ReadLine(), out Config.round)) || !(Config.round >= -15) || !(Config.round <= 0))
-                                            { Console.ForegroundColor = ConsoleColor.Red; Console.WriteLine(Lang.errorformat); Console.ResetColor(); } //ввод значения
+                                                { Console.ForegroundColor = ConsoleColor.Red; Console.WriteLine(Lang.errorformat); Console.ResetColor(); Console.Write(Lang.predlozhenie_vvoda); } //ввод значения
                                             break;
                                         case 3:
+                                            exit1 = false;
+                                            Config.CreateConfig(Config.lang, Config.round);
+                                            break;
+                                        case 4:
                                             exit1 = false;
                                             break;
                                     }
                                     Console.Clear();
                                 }
-                                Config.CreateConfig(Config.lang, Config.round);
                             }
                             break;
                         case 3: //о программе
