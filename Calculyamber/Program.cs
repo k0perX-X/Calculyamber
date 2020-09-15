@@ -91,8 +91,7 @@ namespace Calculyamber
                             "   1 - Начать работу\n" +
                             "   2 - Настройки\n" +
                             "   3 - О программе\n" +
-                            "   4 - Выход на рабочий стол\n\n" +
-                            "Пункт меню: ";
+                            "   4 - Выход на рабочий стол\n\n";
                         Lang.errorconfig = "\nНЕПРАВИЛЬНЫЙ ФОРМАТ CONFIG ФАЙЛА! ИСПОЛЬЗОВАНЫ СТАНДАРТНЫЕ НАСТРОЙКИ \n" +
                             "ЗАЙДИТЕ В НАСТРОЙКИ, ЧТОБЫ ЭТО СООБЩЕНИЕ ИСЧЕЗЛО";
                         Lang.Oproge = "";
@@ -109,7 +108,7 @@ namespace Calculyamber
                         ///Lang.errorvivod = "Не число";
                         break;
                     case 2:
-                        Lang.stroka1 = "Enter the number to calculate its square root";
+                        /*Lang.stroka1 = "Enter the number to calculate its square root";
                         Lang.zapros = "Save selection?\n" +
                             "1 - Yes \n" +
                             "2 - No \n";
@@ -123,48 +122,17 @@ namespace Calculyamber
                             "   4 - Exit to desktop\n\n" +
                             "Menu item: ";
                         Lang.errorconfig = "\nWRONG CONFIG FILE FORMAT! DEFAULT SETTINGS WILL BE USED \n" +
-                            "ЗАЙДИТЕ В НАСТРОЙКИ, ЧТОБЫ ЭТО СООБЩЕНИЕ ИСЧЕЗЛО";
-                        Lang.Oproge = "";
-                        Lang.settings = "\nВведите число, соответствующее пункту меню\n\n";
-                        Lang.settingsstroka1 = "    1 - Choose language                Current language: English";
-                        Lang.settingsstroka2 = "    2 - Выбор разряда округления       Current value: ";
-                        Lang.settingsback = "    3 - Save settings and exit to main menu";
-                        Lang.predlozhenie_vvoda = "Menu item: ";
-                        Lang.menuzagl = "\nMAIN MENU";
-                        Lang.settingszagl = "\nSETTINGS MENU";
-                        Lang.Oprogezagl = "\nABOUT";
-                        Lang.settingsstroka2_1 = "\nВведите значение разряда округления.\n\n" +
-                            "Минимальное значение разряда -15. Округление до разрядов 0 и 1 округляет число до целого.\n";
-                        ///Lang.errorvivod = "Not a number";
+                        ///Lang.errorvivod = "Not a number";*/
                         break;
                     case 3:
-                        Lang.stroka1 = "Введiть число, корiнь якого хочете отримати";
+                        /*Lang.stroka1 = "Введiть число, корiнь якого хочете отримати";
                         Lang.zapros = "Зберегти вибiр?\n" +
                             "1 - Так \n" +
                             "2 - Нi \n";
                         Lang.errorformat = "Невiрний формат";
                         ///Lang.kolvochisel = "Скiльки чисел ви хочете ввести? (Для нескiнченного введення введiть 0) ";
                         Lang.vihod = "Для виходу натиснiть будь-яку клавiшу";
-                        Lang.menu = "\nВведите число, соответствующее пункту меню\n\n" +
-                            "   1 - Калькулямбер\n" +
-                            "   2 - Настройки\n" +
-                            "   3 - О программе\n" +
-                            "   4 - Выход\n\n" +
-                            "Пункт меню: ";
-                        Lang.errorconfig = "\nНЕПРАВИЛЬНЫЙ ФОРМАТ CONFIG ФАЙЛА! ИСПОЛЬЗОВАНЫ СТАНДАРТНЫЕ НАСТРОЙКИ \n" +
-                            "ЗАЙДИТЕ В НАСТРОЙКИ, ЧТОБЫ ЭТО СООБЩЕНИЕ ИСЧЕЗЛО";
-                        Lang.Oproge = "";
-                        Lang.settings = "\nВведите число, соответствующее пункту меню\n\n";
-                        Lang.settingsstroka1 = "    1 - Выбор языка                   Текущее значение: Русский";
-                        Lang.settingsstroka2 = "    2 - Выбор разряда округления      Текущее значение: ";
-                        Lang.settingsback = "    3 - Вернуться в главное меню и сохранить настройки";
-                        Lang.predlozhenie_vvoda = "Пункт меню: ";
-                        Lang.menuzagl = "\nГЛАВНОЕ МЕНЮ";
-                        Lang.settingszagl = "\nМЕНЮ НАСТРОЕК";
-                        Lang.Oprogezagl = "\nО ПРОГРАММЕ";
-                        Lang.settingsstroka2_1 = "\nВведите значение разряда округления.\n\n" +
-                            "Минимальное значение разряда -15. Округление до разрядов 0 и 1 округляет число до целого.\n";
-                        ///Lang.errorvivod = "Чи не число";
+                        ///Lang.errorvivod = "Чи не число";*/
                         break;
                 }
             }
