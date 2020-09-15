@@ -100,7 +100,7 @@ namespace Calculyamber
                         Lang.settingsstroka1 = "    1 - Выбор языка                   Текущее значение: Русский";
                         Lang.settingsstroka2 = "    2 - Выбор разряда округления      Текущее значение: ";
                         Lang.settingsback = "    3 - Вернуться в главное меню и сохранить настройки";
-                        Lang.settingsvvod = "Пункт меню: ";
+                        Lang.predlozhenie_vvoda = "Пункт меню: ";
                         Lang.menuzagl = "\nГЛАВНОЕ МЕНЮ";
                         Lang.settingszagl = "\nМЕНЮ НАСТРОЕК";
                         Lang.Oprogezagl = "\nО ПРОГРАММЕ";
@@ -129,7 +129,7 @@ namespace Calculyamber
                         Lang.settingsstroka1 = "    1 - Choose language                Current language: English";
                         Lang.settingsstroka2 = "    2 - Выбор разряда округления       Current value: ";
                         Lang.settingsback = "    3 - Save settings and exit to main menu";
-                        Lang.settingsvvod = "Menu item: ";
+                        Lang.predlozhenie_vvoda = "Menu item: ";
                         Lang.menuzagl = "\nMAIN MENU";
                         Lang.settingszagl = "\nSETTINGS MENU";
                         Lang.Oprogezagl = "\nABOUT";
@@ -158,7 +158,7 @@ namespace Calculyamber
                         Lang.settingsstroka1 = "    1 - Выбор языка                   Текущее значение: Русский";
                         Lang.settingsstroka2 = "    2 - Выбор разряда округления      Текущее значение: ";
                         Lang.settingsback = "    3 - Вернуться в главное меню и сохранить настройки";
-                        Lang.settingsvvod = "Пункт меню: ";
+                        Lang.predlozhenie_vvoda = "Пункт меню: ";
                         Lang.menuzagl = "\nГЛАВНОЕ МЕНЮ";
                         Lang.settingszagl = "\nМЕНЮ НАСТРОЕК";
                         Lang.Oprogezagl = "\nО ПРОГРАММЕ";
@@ -215,7 +215,7 @@ namespace Calculyamber
                                     Console.WriteLine(Lang.settingsstroka2 + Config.round.ToString());
                                     Console.WriteLine(Lang.settingsback);
                                     Console.WriteLine('\n');
-                                    Console.Write(Lang.settingsvvod);
+                                    Console.Write(Lang.predlozhenie_vvoda);
                                     while (!(int.TryParse(Console.ReadLine(), out tf)) || !((tf >= 1) && (tf <= 3)))
                                     { Console.ForegroundColor = ConsoleColor.Red; Console.WriteLine(Lang.errorformat); Console.ResetColor(); } //ввод значения
                                     switch (tf)
@@ -228,7 +228,7 @@ namespace Calculyamber
                                         case 2:
                                             Console.Clear();
                                             Console.WriteLine(Lang.settingsstroka2_1);
-                                            Console.Write(Lang.settingsvvod);
+                                            Console.Write(Lang.predlozhenie_vvoda);
                                             while (!(int.TryParse(Console.ReadLine(), out Config.round)) || !(Config.round >= -15) || !(Config.round <= 0))
                                             { Console.ForegroundColor = ConsoleColor.Red; Console.WriteLine(Lang.errorformat); Console.ResetColor(); } //ввод значения
                                             break;
@@ -279,17 +279,7 @@ namespace Calculyamber
                 else
                 {
                     Console.ForegroundColor = ConsoleColor.DarkYellow; // устанавливаем цвет
-                    if (Config.round > 0)
-                    {
-                        int x = (int)Math.Round(Math.Sqrt(chislo));
-                        for (int i = 1; i < Config.round; i++)
-                        {
-                            if (x % 10 < 6) x = x / 10;
-                            else x = x / 10 + 1;
-                        }
-                        Console.WriteLine(x * Math.Pow(10, Config.round - 1));
-                    }
-                    else Console.WriteLine(Math.Round(Math.Sqrt(chislo), -Config.round));
+                    Console.WriteLine(Math.Round(Math.Sqrt(chislo), -Config.round));
                     Console.ResetColor(); // сбрасываем в стандартный
                 }
             }
@@ -316,7 +306,7 @@ namespace Calculyamber
             public static string settingsstroka1 = "";
             public static string settingsstroka2 = "";
             public static string settingsback = "";
-            public static string settingsvvod = "";
+            public static string predlozhenie_vvoda = "";
             public static string Oprogezagl = "";
             public static string settingsstroka2_1 = "";
             ///public static string errorvivod = "";
